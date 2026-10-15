@@ -119,7 +119,7 @@ tr.cp.part td{background:repeating-linear-gradient(135deg,rgba(159,208,255,.07) 
 th .auto{margin-left:6px;padding:2px 5px;border:1px solid var(--line);font:500 9.5px/1 var(--f-mono);letter-spacing:.06em;color:var(--dim);text-transform:none;vertical-align:1px}
 
 /* Маркетинг II — металлическая Z-ячейка с половинами B и A */
-td.m2 .cell{position:relative;z-index:1;text-shadow:0 0 8px var(--void),0 0 2px var(--void)}
+td.m2 .cell{text-align:center;position:relative;z-index:1;text-shadow:0 0 8px var(--void),0 0 2px var(--void)}
 td.m2 .zd,td.m2 .zh{display:none}
 td.m2.zon .zd,td.m2.zon .zh{display:block}
 td.m2 input.cell:focus ~ .zh,td.m2 input.cell:focus ~ .zd{display:none}
@@ -130,9 +130,9 @@ td.m2 input.cell:focus ~ .zh,td.m2 input.cell:focus ~ .zd{display:none}
 td.m2.hovB .zd .hB,td.m2.hovA .zd .hA{background:rgba(159,208,255,.045)}
 .zd svg{position:absolute;inset:0;width:100%;height:100%}
 .zd .zs{fill:none;stroke:rgba(159,208,255,.10);stroke-width:1;vector-effect:non-scaling-stroke}
-.zl{position:absolute;top:50%;transform:translate(-50%,-50%);font:700 19px/1 var(--f-display);color:rgba(150,160,175,.045);
+.zl{position:absolute;top:50%;transform:translateY(-50%);font:700 19px/1 var(--f-display);color:rgba(150,160,175,.045);
   text-shadow:-1px -1px 0 rgba(0,0,0,.16),1px 1px 0 rgba(255,255,255,.03);transition:color .3s,text-shadow .3s}
-.zl.lB{left:18%}.zl.lA{left:62%}
+.zl.lB{left:calc(9% - .18em)}.zl.lA{right:calc(9% - .18em)}   /* было: центр буквы на 18% ширины → зазор сокращён вдвое */
 td.m2.hasB .lB,td.m2.hasA .lA{color:rgba(159,208,255,.13);text-shadow:-1px -1px 0 rgba(0,0,0,.2),1px 1px 0 rgba(255,255,255,.04),0 0 10px rgba(159,208,255,.14)}
 td.m2.hovB .lB,td.m2.hovA .lA{color:rgba(159,208,255,.2)}
 td.m2.upB .lB,td.m2.upA .lA{animation:zp .9s ease-in-out infinite}
@@ -291,7 +291,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
           <th>№ сделки<span class="lock" data-lock></span></th>
           <th style="text-align:right">Сумма сделки<span class="lock" data-lock></span></th>
           <th class="mk" style="text-align:right">Маркетинг I<span class="auto" title="Считается автоматически: Сумма сделки × 0,0409836">ƒ авто</span></th>
-          <th class="mk" style="text-align:right" title="Введённое число × 0,409836">Маркетинг II<span class="lock" data-lock></span></th>
+          <th class="mk" style="text-align:center" title="Введённое число × 0,409836">Маркетинг II<span class="lock" data-lock></span></th>
           <th>Комментарий</th>
         </tr>
       </thead>
