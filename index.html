@@ -143,6 +143,16 @@ td.m2 .zh.act{cursor:pointer}
 td.m2 .zh.zB{clip-path:polygon(0 0,60.7% 0,39.3% 100%,0 100%)}
 td.m2 .zh.zA{clip-path:polygon(60.7% 0,100% 0,100% 100%,39.3% 100%)}
 
+/* Удаление сделки (owner) */
+.rdel{position:absolute;right:6px;top:50%;transform:translateY(-50%);z-index:3;height:24px;padding:0 8px;font-size:11px;letter-spacing:.04em;
+  border-color:var(--line);color:var(--dim);background:var(--panel);opacity:0;transition:opacity .15s,background .15s,color .15s}
+tbody tr:hover .rdel,.rdel:focus-visible,.rdel.sure{opacity:1}
+.rdel:hover{background:var(--bad);border-color:var(--bad);color:var(--void)}
+.rdel.sure{border-color:var(--bad);color:var(--bad)}
+.rdel.sure:hover{color:var(--void)}
+tr.gone{opacity:.35;pointer-events:none;transition:opacity .2s}
+@media (hover:none){.rdel{opacity:.55}}
+
 /* Просмотр PDF */
 .pvbg{position:fixed;inset:0;z-index:7;background:rgba(2,3,4,.74);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 .pv{position:fixed;z-index:8;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel);box-shadow:0 24px 70px rgba(0,0,0,.65);animation:pop .18s ease-out}
@@ -404,6 +414,10 @@ td.changed .cell{animation:chg 1.6s ease-out}
       this.rows.push({row:n,deal:String(1040+n-1),sum:null,m1:null,m2:null,m2in:null,m1cp:false,comment:'',fB:null,fA:null});
       return this.getData();
     },
+    deleteDeal:function(k,row){
+      if(this.me().role!=='owner') throw new Error('Удалять сделки может только владелец.');
+      this.find(row); this.rows=this.rows.filter(function(x){return x.row!==row;}); return this.getData();
+    },
     checkpoint:function(k,amount,round){
       if(this.me().role!=='owner') throw new Error('Checkpoint доступен только владельцу.');
       var p=planCP(this.rows,amount,!!round); if(!p.items.length) throw new Error('Нечего переносить: в строках нет сумм маркетинга.');
@@ -503,6 +517,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
           sp.textContent=isNum?show(r[f]):r[f]; sp.title=sp.textContent; td.appendChild(sp);
         }
         if(f==='m2') addZ(td,r.row);
+        if(f==='comment' && isOwner()) addDel(td,r.row);
         tr.appendChild(td);
       });
       frag.appendChild(tr);
@@ -619,6 +634,20 @@ td.changed .cell{animation:chg 1.6s ease-out}
       e.preventDefault(); if(tmr){ clearTimeout(tmr); tmr=null; }
       var el=$('c-'+rowId+'-m2'); if(el && el.tagName==='INPUT'){ pvClose(); el.focus(); }
     });
+  }
+  function addDel(td,rowId){
+    var b=document.createElement('button'); b.type='button'; b.className='rdel'; b.textContent='✕';
+    b.title='Удалить сделку'; b.setAttribute('aria-label','Удалить сделку');
+    b.addEventListener('mousedown',function(e){ e.preventDefault(); });
+    b.addEventListener('click',function(){
+      var r=rowById(rowId); if(!r) return;
+      if(!b.classList.contains('sure')){ b.classList.add('sure'); b.textContent='Удалить '+(r.deal||'строку')+'?';
+        clearTimeout(b._t); b._t=setTimeout(function(){ if(b.isConnected){ b.classList.remove('sure'); b.textContent='✕'; } },3500); return; }
+      clearTimeout(b._t); var tr=td.parentNode; tr.classList.add('gone'); busy++;
+      call('deleteDeal',rowId,r.deal).then(function(d){ busy--; apply(d); toast('Сделка '+(r.deal||'')+' удалена'); })
+        .catch(function(e){ busy--; tr.classList.remove('gone'); b.classList.remove('sure'); b.textContent='✕'; toast(msg(e),true); });
+    });
+    td.appendChild(b);
   }
   function halfAction(rowId,slot){
     var r=rowById(rowId); if(!r) return; var f=r['f'+slot];
