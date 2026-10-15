@@ -115,6 +115,55 @@ tr.cp.part td{background:repeating-linear-gradient(135deg,rgba(159,208,255,.07) 
 .dlg .sw .tx b{font:600 13px/1.2 var(--f-body);color:var(--ink);letter-spacing:0}
 .dlg .sw .tx span{font:400 12px/1.4 var(--f-body);color:var(--dim);letter-spacing:0;text-transform:none}
 
+/* Маркетинг I — авто */
+th .auto{margin-left:6px;padding:2px 5px;border:1px solid var(--line);font:500 9.5px/1 var(--f-mono);letter-spacing:.06em;color:var(--dim);text-transform:none;vertical-align:1px}
+
+/* Маркетинг II — металлическая Z-ячейка с половинами B и A */
+td.m2 .cell{position:relative;z-index:1;text-shadow:0 0 8px var(--void),0 0 2px var(--void)}
+td.m2 .zd,td.m2 .zh{display:none}
+td.m2.zon .zd,td.m2.zon .zh{display:block}
+td.m2 input.cell:focus ~ .zh,td.m2 input.cell:focus ~ .zd{display:none}
+.zd{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.zd i{position:absolute;inset:0;transition:background .25s}
+.zd .hB{clip-path:polygon(0 0,60.7% 0,39.3% 100%,0 100%);background:repeating-linear-gradient(90deg,rgba(255,255,255,.016) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.18))}
+.zd .hA{clip-path:polygon(60.7% 0,100% 0,100% 100%,39.3% 100%);background:repeating-linear-gradient(90deg,rgba(255,255,255,.016) 0 1px,transparent 1px 3px),linear-gradient(0deg,rgba(255,255,255,.03),rgba(0,0,0,.18))}
+td.m2.hovB .zd .hB,td.m2.hovA .zd .hA{background:repeating-linear-gradient(90deg,rgba(159,208,255,.03) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(159,208,255,.09),rgba(159,208,255,.02))}
+.zd svg{position:absolute;inset:0;width:100%;height:100%}
+.zd .zz{fill:none;stroke:rgba(159,208,255,.34);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-linejoin:bevel}
+.zd .zx{fill:none;stroke:rgba(159,208,255,.12);stroke-width:1;stroke-dasharray:2 3;vector-effect:non-scaling-stroke}
+.zl{position:absolute;top:50%;transform:translate(-50%,-50%);font:700 21px/1 var(--f-display);color:rgba(120,130,145,.14);
+  text-shadow:-1px -1px 0 rgba(0,0,0,.95),1px 1px 0 rgba(255,255,255,.08);transition:color .3s,text-shadow .3s}
+.zl.lB{left:20%}.zl.lA{left:80%}
+td.m2.hasB .lB,td.m2.hasA .lA{color:rgba(159,208,255,.34);text-shadow:-1px -1px 0 rgba(0,0,0,.95),1px 1px 0 rgba(255,255,255,.12),0 0 12px rgba(159,208,255,.35)}
+td.m2.upB .lB,td.m2.upA .lA{animation:zp .9s ease-in-out infinite}
+@keyframes zp{50%{color:rgba(159,208,255,.7);text-shadow:0 0 16px rgba(159,208,255,.8)}}
+td.m2 .zh{position:absolute;inset:0;z-index:2;width:100%;height:100%;margin:0;padding:0;border:0;background:transparent;cursor:default}
+td.m2 .zh:hover{background:transparent;color:inherit}
+td.m2 .zh.act{cursor:pointer}
+td.m2 .zh.zB{clip-path:polygon(0 0,60.7% 0,39.3% 100%,0 100%)}
+td.m2 .zh.zA{clip-path:polygon(60.7% 0,100% 0,100% 100%,39.3% 100%)}
+
+/* Просмотр PDF */
+.pvbg{position:fixed;inset:0;z-index:7;background:rgba(2,3,4,.74);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.pv{position:fixed;z-index:8;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel);box-shadow:0 24px 70px rgba(0,0,0,.65);animation:pop .18s ease-out}
+.pv::before,.pv::after{content:"";position:absolute;width:12px;height:12px;border:solid var(--ice);pointer-events:none;z-index:1}
+.pv::before{top:-1px;left:-1px;border-width:1px 0 0 1px}.pv::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
+.pv.pin{left:0;right:0;margin:0 auto;top:calc(24px + env(safe-area-inset-top,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));width:min(920px,calc(100vw - 32px))}
+.pv-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:9px 10px 9px 14px;border-bottom:1px solid var(--line);min-height:46px}
+.pv-t{flex:1 1 200px;min-width:0;font:500 12px/1.35 var(--f-mono);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv-t b{color:var(--ice);font-weight:700;margin-right:4px}
+.pv-a{display:flex;flex-wrap:wrap;gap:6px}
+.pv.hov .pv-a,.pv.hov .pv-x{display:none}
+.pv .hint{font:400 11px/1 var(--f-mono);color:var(--dim)}
+.pv.pin .hint{display:none}
+.pv-b{flex:1;min-height:0;overflow:auto;padding:12px;background:#050608;display:flex;flex-direction:column;align-items:center;gap:10px;overscroll-behavior:contain}
+.pv-b canvas{display:block;flex:none;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.55)}
+.pv-load{margin:auto;padding:24px;text-align:center;color:var(--dim);font:500 12px/1.5 var(--f-mono)}
+.pv-load.err{color:var(--bad)}
+button.danger{border-color:var(--bad);color:var(--bad)}
+button.danger:hover{background:var(--bad);color:var(--void)}
+.fchip{height:20px;padding:0 7px;margin-left:8px;font-size:10px;vertical-align:1px}
+
 /* Archive */
 #archive{margin-top:22px;display:grid;gap:18px}
 .rep{border:1px solid var(--line);background:var(--panel);animation:rowin .4s both}
@@ -241,8 +290,8 @@ td.changed .cell{animation:chg 1.6s ease-out}
         <tr class="cols">
           <th>№ сделки<span class="lock" data-lock></span></th>
           <th style="text-align:right">Сумма сделки<span class="lock" data-lock></span></th>
-          <th class="mk" style="text-align:right">Маркетинг I<span class="lock" data-lock></span></th>
-          <th class="mk" style="text-align:right">Маркетинг II<span class="lock" data-lock></span></th>
+          <th class="mk" style="text-align:right">Маркетинг I<span class="auto" title="Считается автоматически: Сумма сделки × 0,0409836">ƒ авто</span></th>
+          <th class="mk" style="text-align:right" title="Введённое число × 0,409836">Маркетинг II<span class="lock" data-lock></span></th>
           <th>Комментарий</th>
         </tr>
       </thead>
@@ -251,11 +300,17 @@ td.changed .cell{animation:chg 1.6s ease-out}
   </div>
 
   <div class="foot" id="foot">
-    <span><kbd>Enter</kbd> вниз · <kbd>Tab</kbd> вправо · <kbd>Esc</kbd> отменить</span>
+    <span><kbd>Enter</kbd> вниз · <kbd>Tab</kbd> вправо · <kbd>Esc</kbd> отменить · М II: <kbd>2× клик</kbd> правка</span>
     <span id="count">0 сделок</span>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="pvbg" id="pvbg" hidden></div>
+<section class="pv" id="pv" hidden aria-label="Просмотр документа">
+  <div class="pv-h"><span class="pv-t" id="pvt"></span><span class="hint">клик — открыть</span><div class="pv-a" id="pva"></div><button type="button" class="ghost pv-x" id="pvx" aria-label="Закрыть">✕</button></div>
+  <div class="pv-b" id="pvb"></div>
+</section>
+<input type="file" id="pick" accept="application/pdf,.pdf" hidden>
 <div class="modal" id="modal" hidden>
   <form class="dlg" id="cpform" autocomplete="off">
     <h3>Checkpoint</h3>
@@ -280,6 +335,8 @@ td.changed .cell{animation:chg 1.6s ease-out}
 
   /* ── Расчёт Checkpoint: тот же алгоритм, что на сервере ── */
   function r2(x){ return Math.round(x*100)/100; }
+  var K1=0.0409836, K2=0.409836;            // М I = Сумма × K1;  М II = ввод × K2
+  var MAXF=10*1024*1024;
   // round=true: у делящейся строки части М I и М II округляются до ближайшей 1000
   function planCP(rows,amount,round){
     var left=r2(amount), items=[], covered=0;
@@ -287,43 +344,64 @@ td.changed .cell{animation:chg 1.6s ease-out}
     for(var i=0;i<rows.length && left>0;i++){
       var r=rows[i], m1=Number(r.m1)||0, m2=Number(r.m2)||0, t=r2(m1+m2);
       if(t<=0) continue;
-      if(t<=left){ items.push({row:r.row,deal:r.deal,sum:r.sum,m1:m1,m2:m2,comment:r.comment,part:false}); left=r2(left-t); covered=r2(covered+t); continue; }
+      if(t<=left){ items.push({row:r.row,deal:r.deal,sum:r.sum,m1:m1,m2:m2,comment:r.comment,part:false,fB:r.fB||null,fA:r.fA||null}); left=r2(left-t); covered=r2(covered+t); continue; }
       var a1,a2;
       if(round){ a1=k1(m1*left/t,m1); a2=k1(m2*left/t,m2); }
       else { a1=r2(m1*left/t); a2=r2(left-a1); }
       left=0;
       if(a1+a2<=0) break;
       var full=(a1>=m1&&a2>=m2);
-      items.push({row:r.row,deal:r.deal,sum:r.sum,m1:a1,m2:a2,comment:r.comment,part:!full,rest1:r2(m1-a1),rest2:r2(m2-a2)});
+      items.push({row:r.row,deal:r.deal,sum:r.sum,m1:a1,m2:a2,comment:r.comment,part:!full,rest1:r2(m1-a1),rest2:r2(m2-a2),fB:r.fB||null,fA:r.fA||null});
       covered=r2(covered+a1+a2);
     }
     return {items:items, covered:covered, short:left};
   }
 
   /* ── Демо-сервер: те же правила, что в Code.gs (роль для просмотра: #user или #editor в адресе) ── */
+  function demoPdf(title,lines){                       // маленький настоящий PDF для примера
+    var pages=[[title].concat(lines.slice(0,3)),[title+' (2)'].concat(lines.slice(3))], objs=[], kids=[];
+    objs[1]='<< /Type /Catalog /Pages 2 0 R >>';
+    objs[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+    pages.forEach(function(ls,i){
+      var n=4+i*2, txt='BT /F1 22 Tf 60 760 Td ('+ls[0]+') Tj /F1 13 Tf 0 -40 Td '+ls.slice(1).map(function(l){return '('+l+') Tj 0 -22 Td';}).join(' ')+' ET 0.62 0.82 1 RG 2 w 60 748 m 535 748 l S';
+      objs[n]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents '+(n+1)+' 0 R /Resources << /Font << /F1 3 0 R >> >> >>';
+      objs[n+1]='<< /Length '+txt.length+' >>\nstream\n'+txt+'\nendstream'; kids.push(n+' 0 R');
+    });
+    objs[2]='<< /Type /Pages /Kids ['+kids.join(' ')+'] /Count '+pages.length+' >>';
+    var out='%PDF-1.4\n', off=[];
+    for(var i=1;i<objs.length;i++){ off[i]=out.length; out+=i+' 0 obj\n'+objs[i]+'\nendobj\n'; }
+    var x=out.length; out+='xref\n0 '+objs.length+'\n0000000000 65535 f \n';
+    for(i=1;i<objs.length;i++) out+=('000000000'+off[i]).slice(-10)+' 00000 n \n';
+    out+='trailer\n<< /Size '+objs.length+' /Root 1 0 R >>\nstartxref\n'+x+'\n%%EOF';
+    return btoa(out);
+  }
+  function demoRow(row,deal,sum,m2in,comment){ return {row:row,deal:deal,sum:sum,m1:r2(sum*K1),m2:m2in==null?null:r2(m2in*K2),m2in:m2in,m1cp:false,comment:comment,fB:null,fA:null}; }
   var Demo = {
     role:(/editor/.test(location.hash)?'editor':/user/.test(location.hash)?'user':'owner'),
     seq:6,
     rows:[
-      {row:2,deal:'1041',sum:1850000,m1:37000,m2:18500,comment:'Щит ВРУ-1, отгрузка 20.10'},
-      {row:3,deal:'1042',sum:642500,m1:12850,m2:6425,comment:'Ждём оплату счёта'},
-      {row:4,deal:'1043',sum:2310000,m1:46200,m2:0,comment:'КП согласовано'},
-      {row:5,deal:'1044',sum:418900,m1:8378,m2:4189,comment:''}
+      demoRow(2,'1041',1850000,45000,'Щит ВРУ-1, отгрузка 20.10'),
+      demoRow(3,'1042',642500,20000,'Ждём оплату счёта'),
+      demoRow(4,'1043',2310000,null,'КП согласовано'),
+      demoRow(5,'1044',418900,10000,'')
     ],
+    files:{ 'demo-b-1042':{name:'Акт_1042.pdf',b64:demoPdf('BOOK_KEEPER - DEMO B',['Deal 1042','Document B, page 1','Sample file for preview','Page 2 of the sample','Scroll works here'])} },
     archive:[],
     me:function(){ return {owner:{name:'user_m',role:'owner'},editor:{name:'Менеджер 2',role:'editor'},user:{name:'user_v',role:'user'}}[this.role]; },
     getData:function(){ return {user:this.me(),rows:JSON.parse(JSON.stringify(this.rows)),at:new Date().toISOString()}; },
+    find:function(row){ var r=this.rows.filter(function(x){return x.row===row;})[0]; if(!r) throw new Error('Строка не найдена. Обновите страницу.'); return r; },
     saveCell:function(k,row,field,value){
+      if(field==='m1') throw new Error('Маркетинг I считается автоматически из суммы сделки.');
       if(this.me().role==='user' && field!=='comment') throw new Error('Вам доступно редактирование только столбца «Комментарий».');
-      var r=this.rows.filter(function(x){return x.row===row;})[0];
-      if(!r) throw new Error('Строка не найдена. Обновите страницу.');
-      r[field]= (field==='sum'||field==='m1'||field==='m2') ? (value===''?null:Number(value)) : String(value);
+      var r=this.find(row), v=(field==='sum'||field==='m2')?(value===''?null:Number(value)):String(value);
+      if(field==='m2'){ r.m2in=v; r.m2=v===null?null:r2(v*K2); }
+      else { r[field]=v; if(field==='sum'&&!r.m1cp) r.m1=v===null?null:r2(v*K1); }
       return {at:new Date().toISOString()};
     },
     addRow:function(){
       if(this.me().role==='user') throw new Error('Добавлять сделки может владелец или редактор.');
       var n=this.seq++;
-      this.rows.push({row:n,deal:String(1040+n-1),sum:null,m1:null,m2:null,comment:''});
+      this.rows.push({row:n,deal:String(1040+n-1),sum:null,m1:null,m2:null,m2in:null,m1cp:false,comment:'',fB:null,fA:null});
       return this.getData();
     },
     checkpoint:function(k,amount,round){
@@ -331,14 +409,22 @@ td.changed .cell{animation:chg 1.6s ease-out}
       var p=planCP(this.rows,amount,!!round); if(!p.items.length) throw new Error('Нечего переносить: в строках нет сумм маркетинга.');
       var self=this, rep={id:'CP-'+Date.now(),at:new Date().toISOString(),requested:amount,total:p.covered,round:!!round,items:p.items};
       p.items.forEach(function(it){
-        var r=self.rows.filter(function(x){return x.row===it.row;})[0];
-        if(it.part){ r.m1=it.rest1; r.m2=it.rest2; } else self.rows=self.rows.filter(function(x){return x.row!==it.row;});
+        var r=self.find(it.row);
+        if(it.part){ r.m1=it.rest1; r.m2=it.rest2; r.m1cp=true; r.m2in=null; } else self.rows=self.rows.filter(function(x){return x.row!==it.row;});
       });
       this.archive.unshift(rep);
       var d=this.getData(); d.report=rep; return d;
     },
-    getArchive:function(){ if(this.me().role!=='owner') throw new Error('Archive доступен только владельцу.'); return JSON.parse(JSON.stringify(this.archive)); }
+    getArchive:function(){ if(this.me().role!=='owner') throw new Error('Archive доступен только владельцу.'); return JSON.parse(JSON.stringify(this.archive)); },
+    uploadFile:function(k,row,slot,name,b64){
+      if(this.me().role!=='owner') throw new Error('Загружать файлы может только владелец.');
+      var r=this.find(row); if(r.m2===null) throw new Error('Сначала заполните Маркетинг II в этой строке.');
+      var id='demo-'+Date.now(); this.files[id]={name:name,b64:b64}; r['f'+slot]={id:id,name:name}; return {id:id,name:name};
+    },
+    deleteFile:function(k,row,slot){ if(this.me().role!=='owner') throw new Error('Удалять файлы может только владелец.'); this.find(row)['f'+slot]=null; return {ok:true}; },
+    getFile:function(k,id){ var f=this.files[id]; if(!f) throw new Error('Файл не найден.'); return {id:id,name:f.name,b64:f.b64}; }
   };
+  Demo.rows[1].fB={id:'demo-b-1042',name:'Акт_1042.pdf'};
 
   function call(fn){
     var args=[].slice.call(arguments,1);
@@ -376,7 +462,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
      поэтому высота не прыгает и ввод не сбивается. */
   var FIELDS=['deal','sum','m1','m2','comment'], built='', firstPaint=true;
   function isNumF(f){ return f==='sum'||f==='m1'||f==='m2'; }
-  function canEdit(field){ return state.user && (state.user.role==='owner' || state.user.role==='editor' || field==='comment'); }
+  function canEdit(field){ if(field==='m1') return false; return !!state.user && (state.user.role==='owner' || state.user.role==='editor' || field==='comment'); }
   function isOwner(){ return state.user && state.user.role==='owner'; }
   function canAdd(){ return state.user && (state.user.role==='owner' || state.user.role==='editor'); }
   function rowById(id){ for(var i=0;i<state.rows.length;i++) if(state.rows[i].row===id) return state.rows[i]; return null; }
@@ -402,7 +488,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
       else if(!old[r.row]) tr.className='in';
       FIELDS.forEach(function(f){
         var td=document.createElement('td'); var isNum=isNumF(f);
-        if(f==='m1'||f==='m2') td.className='m';
+        if(f==='m1'||f==='m2') td.className='m'+(f==='m2'?' m2':'');
         var cls='cell'+(isNum?' num':'')+(f==='deal'?' deal':'');
         if(canEdit(f)){
           var inp=document.createElement('input');
@@ -416,24 +502,28 @@ td.changed .cell{animation:chg 1.6s ease-out}
           var sp=document.createElement('span'); sp.className=cls+' ro'; sp.id='c-'+r.row+'-'+f;
           sp.textContent=isNum?show(r[f]):r[f]; sp.title=sp.textContent; td.appendChild(sp);
         }
+        if(f==='m2') addZ(td,r.row);
         tr.appendChild(td);
       });
       frag.appendChild(tr);
     });
     tb.replaceChildren(frag); built=sig; firstPaint=false;
+    state.rows.forEach(decorM2);
   }
   // Точечное обновление: только ячейки, которые изменили коллеги
+  function setCell(r,f,flash){
+    var el=$('c-'+r.row+'-'+f); if(!el || el===document.activeElement) return;
+    var txt=isNumF(f)?show(r[f]):r[f];
+    var cur=el.tagName==='INPUT'?el.value:el.textContent;
+    if(cur===txt) return;
+    if(el.tagName==='INPUT') el.value=txt; else { el.textContent=txt; el.title=txt; }
+    if(flash){ var td=el.parentNode; td.classList.remove('changed'); void td.offsetWidth; td.classList.add('changed'); }
+  }
+  function refreshRow(r){ FIELDS.forEach(function(f){ setCell(r,f,false); }); decorM2(r); }
   function patch(){
     state.rows.forEach(function(r){
-      FIELDS.forEach(function(f){
-        var el=$('c-'+r.row+'-'+f); if(!el) return;
-        if(el===document.activeElement || pend[r.row+'-'+f]) return; // свою правку не трогаем
-        var txt=isNumF(f)?show(r[f]):r[f];
-        var cur=el.tagName==='INPUT'?el.value:el.textContent;
-        if(cur===txt) return;
-        if(el.tagName==='INPUT') el.value=txt; else { el.textContent=txt; el.title=txt; }
-        var td=el.parentNode; td.classList.remove('changed'); void td.offsetWidth; td.classList.add('changed');
-      });
+      FIELDS.forEach(function(f){ if(!pend[r.row+'-'+f]) setCell(r,f,true); });
+      decorM2(r);
     });
   }
   function plural(n,a,b,c){var m=n%10,h=n%100;return (m===1&&h!==11)?a:(m>=2&&m<=4&&(h<12||h>14))?b:c;}
@@ -450,7 +540,11 @@ td.changed .cell{animation:chg 1.6s ease-out}
   }
   function bind(inp,td,rowId,f,isNum){
     var orig;
-    inp.addEventListener('focus',function(){ var r=rowById(rowId); orig=inp.value; if(isNum&&r) inp.value=(r[f]===null||r[f]===undefined)?'':String(r[f]).replace('.',','); inp.select(); });
+    inp.addEventListener('focus',function(){
+      var r=rowById(rowId); orig=inp.value; if(!isNum||!r) { inp.select(); return; }
+      var v=(f==='m2' && r.m2in!=null) ? r.m2in : r[f];          // М II: показываем введённое число, а не результат
+      inp.value=(v===null||v===undefined)?'':String(v).replace('.',','); inp.select();
+    });
     inp.addEventListener('keydown',function(e){
       if(e.key==='Enter'){ e.preventDefault(); moveFrom(inp,e.shiftKey?-1:1); }
       else if(e.key==='Escape'){ inp.dataset.cancel='1'; inp.blur(); }
@@ -462,22 +556,198 @@ td.changed .cell{animation:chg 1.6s ease-out}
     var r=rowById(rowId); if(!r) return;
     var v=inp.value;
     if(isNum){ v=parseNum(v); if(typeof v==='number'&&isNaN(v)){ mark(td,'err'); toast('Не похоже на число или формулу. Пример: =120000*0,05',true); inp.value=orig; return; } }
-    var prev=r[f]; var same = isNum ? (v===''?(prev===null||prev===undefined):(v===prev)) : (v===prev);
-    if(isNum) inp.value=show(v);
-    if(same) return;
-    r[f]= isNum ? (v===''?null:v) : v; sum(); paintCP(); // мгновенно: итоги, значение и отметки Checkpoint
+    var base=(f==='m2' && r.m2in!=null) ? r.m2in : r[f];
+    var same = isNum ? (v===''?(base===null||base===undefined):(v===base)) : (v===base);
+    if(same){ if(isNum) inp.value=show(r[f]); return; }
+    var snap={deal:r.deal,sum:r.sum,m1:r.m1,m2:r.m2,m2in:r.m2in,comment:r.comment};
+    var expect=r.deal;
+    if(f==='m2'){ r.m2in=(v===''?null:v); r.m2=(v===''?null:r2(v*K2)); }
+    else { r[f]= isNum ? (v===''?null:v) : v; if(f==='sum' && !r.m1cp) r.m1=(v===''?null:r2(v*K1)); }
+    if(isNum) inp.value=show(r[f]);
+    refreshRow(r); sum(); paintCP();                   // мгновенно: формулы, итоги и отметки Checkpoint
     mark(td,'saved');                                  // зелёная метка сразу, как в Excel
+    if(f==='sum' && !r.m1cp){ var t1=$('c-'+rowId+'-m1'); if(t1) mark(t1.parentNode,'changed'); }
     var k=rowId+'-'+f, seq=(pend[k]||0)+1; pend[k]=seq; busy++;
     var slow=setTimeout(function(){ if(pend[k]===seq) mark(td,'pending'); },1500); // оранжевая — только если сеть тормозит
-    call('saveCell',rowId,f,v,(f==='deal'?prev:r.deal)).then(function(d){
+    call('saveCell',rowId,f,v,expect).then(function(d){
       busy--; clearTimeout(slow);
       if(pend[k]===seq){ delete pend[k]; if(td.classList.contains('pending')) mark(td,'saved'); }
       stamp(d&&d.at);
     }).catch(function(e){
       busy--; clearTimeout(slow);
-      if(pend[k]===seq){ delete pend[k]; r[f]=prev; if(document.activeElement!==inp) inp.value=isNum?show(prev):prev; sum(); mark(td,'err'); }
+      if(pend[k]===seq){ delete pend[k]; var rr=rowById(rowId)||r; for(var x in snap) rr[x]=snap[x];
+        if(document.activeElement!==inp) inp.value=isNum?show(rr[f]):rr[f]; refreshRow(rr); sum(); mark(td,'err'); }
       toast(msg(e),true);
     });
+  }
+
+  /* ── Маркетинг II: Z-ячейка. Левая половина — документ B, правая — A.
+     Наведение — предпросмотр; клик — открыть (owner: загрузить / заменить / удалить); двойной клик — правка числа. ── */
+  var HOVER=!!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
+  var ZHTML='<span class="zd" aria-hidden="true"><i class="hB"></i><i class="hA"></i>'+
+    '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path class="zx" d="M60.7 0 L56 24 M44 76 L39.3 100"/><path class="zz" d="M44 24 H56 L44 76 H56"/></svg>'+
+    '<b class="zl lB">B</b><b class="zl lA">A</b></span>'+
+    '<button type="button" class="zh zB" data-slot="B" tabindex="-1"></button><button type="button" class="zh zA" data-slot="A" tabindex="-1"></button>';
+  function addZ(td,rowId){
+    td.insertAdjacentHTML('beforeend',ZHTML);
+    [].forEach.call(td.querySelectorAll('.zh'),function(btn){ bindHalf(btn,td,rowId); });
+  }
+  function decorM2(r){
+    var el=$('c-'+r.row+'-m2'); if(!el) return; var td=el.parentNode;
+    td.classList.toggle('zon', r.m2!==null && r.m2!==undefined);
+    ['B','A'].forEach(function(slot){
+      var f=r['f'+slot], btn=td.querySelector('.z'+slot); td.classList.toggle('has'+slot,!!f); if(!btn) return;
+      var act=!!f || isOwner() || canEdit('m2');
+      btn.classList.toggle('act',act);
+      var t=f ? (HOVER?'':'Документ '+slot+': '+f.name) : (isOwner()?'Загрузить PDF в '+slot:'');
+      if(canEdit('m2')) t+=(t?' · ':'')+'двойной клик — изменить число';
+      btn.title=t; btn.setAttribute('aria-label',(f?'Документ '+slot+': '+f.name:'Документ '+slot+' не прикреплён'));
+    });
+  }
+  function bindHalf(btn,td,rowId){
+    var slot=btn.dataset.slot, tmr=null;
+    btn.addEventListener('mousedown',function(e){ e.preventDefault(); });   // кнопка не забирает фокус
+    btn.addEventListener('mouseenter',function(){ td.classList.add('hov'+slot); var r=rowById(rowId); if(HOVER && r && r['f'+slot]) hoverOpen(btn,r,slot); });
+    btn.addEventListener('mouseleave',function(){ td.classList.remove('hov'+slot); hoverLeave(); });
+    btn.addEventListener('click',function(e){
+      e.preventDefault();
+      if(!canEdit('m2')){ halfAction(rowId,slot); return; }
+      if(tmr){ clearTimeout(tmr); tmr=null; return; }   // второй клик двойного — не открываем
+      tmr=setTimeout(function(){ tmr=null; halfAction(rowId,slot); },230);
+    });
+    btn.addEventListener('dblclick',function(e){
+      e.preventDefault(); if(tmr){ clearTimeout(tmr); tmr=null; }
+      var el=$('c-'+rowId+'-m2'); if(el && el.tagName==='INPUT'){ pvClose(); el.focus(); }
+    });
+  }
+  function halfAction(rowId,slot){
+    var r=rowById(rowId); if(!r) return; var f=r['f'+slot];
+    if(f){ showPv('pin',f,{row:rowId,slot:slot,deal:r.deal}); return; }
+    if(isOwner()){ pickFor(rowId,slot); return; }
+    if(canEdit('m2')){ var el=$('c-'+rowId+'-m2'); if(el) el.focus(); }
+  }
+
+  /* ── Просмотр PDF (pdf.js): документ вписан по ширине, листается прокруткой ── */
+  var PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  var pv={mode:null,tok:0,openT:null,hideT:null,file:null,ctx:null}, bytesCache={}, docs={};
+  function b64ToBytes(b64){ var s=atob(b64), u=new Uint8Array(s.length); for(var i=0;i<s.length;i++) u[i]=s.charCodeAt(i); return u; }
+  function loadPdfJs(){
+    if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if(loadPdfJs.p) return loadPdfJs.p;
+    loadPdfJs.p=new Promise(function(res,rej){
+      var sc=document.createElement('script'); sc.src=PDFJS+'pdf.min.js';
+      sc.onload=function(){ var L=window.pdfjsLib; if(!L){ loadPdfJs.p=null; return rej(new Error('Просмотрщик PDF не загрузился.')); } L.GlobalWorkerOptions.workerSrc=PDFJS+'pdf.worker.min.js'; res(L); };
+      sc.onerror=function(){ loadPdfJs.p=null; rej(new Error('Не удалось загрузить просмотрщик PDF. Проверьте интернет.')); };
+      document.head.appendChild(sc);
+    });
+    return loadPdfJs.p;
+  }
+  function getBytes(file){
+    if(bytesCache[file.id]) return Promise.resolve(bytesCache[file.id]);
+    return call('getFile',file.id).then(function(d){ var b=b64ToBytes(d.b64); bytesCache[file.id]=b; return b; });
+  }
+  function loadDoc(file){
+    if(docs[file.id]) return docs[file.id];
+    var p=Promise.all([loadPdfJs(),getBytes(file)]).then(function(a){ return a[0].getDocument({data:a[1].slice()}).promise; });
+    p.catch(function(){ delete docs[file.id]; }); docs[file.id]=p; return p;
+  }
+  function hoverOpen(anchor,r,slot){
+    if(pv.mode==='pin') return; clearTimeout(pv.hideT); clearTimeout(pv.openT);
+    var f=r['f'+slot]; if(pv.mode==='hover' && pv.file && pv.file.id===f.id){ return; }
+    pv.openT=setTimeout(function(){ showPv('hover',f,{row:r.row,slot:slot,deal:r.deal},anchor); },200);
+  }
+  function hoverLeave(){ clearTimeout(pv.openT); if(pv.mode==='hover'){ clearTimeout(pv.hideT); pv.hideT=setTimeout(pvClose,240); } }
+  function showPv(mode,file,ctx,anchor){
+    clearTimeout(pv.openT); clearTimeout(pv.hideT);
+    var box=$('pv'), tok=++pv.tok; pv.mode=mode; pv.file=file; pv.ctx=ctx;
+    box.className='pv '+(mode==='pin'?'pin':'hov'); box.removeAttribute('style'); box.hidden=false; $('pvbg').hidden=(mode!=='pin');
+    $('pvt').innerHTML='<b>'+ctx.slot+'</b>сделка '+esc(ctx.deal)+' · '+esc(file.name)+'<span id="pvn"></span>';
+    $('pvt').title=file.name;
+    var acts='<button type="button" id="pvdl">Скачать</button>';
+    if(isOwner() && ctx.row) acts+='<button type="button" class="ghost" id="pvrep">Заменить</button><button type="button" class="ghost" id="pvdel">Удалить</button>';
+    $('pva').innerHTML=mode==='pin'?acts:'';
+    if(mode==='pin'){
+      $('pvdl').onclick=function(){ download(file); };
+      if($('pvrep')) $('pvrep').onclick=function(){ pickFor(ctx.row,ctx.slot); };
+      if($('pvdel')) $('pvdel').onclick=function(){ delFile(this,ctx); };
+    }
+    if(mode==='hover' && anchor){
+      var rc=anchor.getBoundingClientRect(), W=Math.min(460,innerWidth-32), H=Math.min(540,Math.round(innerHeight*0.62));
+      var left=Math.max(16,Math.min(rc.left,innerWidth-W-16));
+      var top=(innerHeight-rc.bottom-8>=H)?rc.bottom+6:Math.max(16,rc.top-H-6);
+      box.style.cssText='left:'+left+'px;top:'+top+'px;width:'+W+'px;height:'+H+'px';
+    }
+    $('pvb').innerHTML='<div class="pv-load">Загружаю документ…</div>';
+    loadDoc(file).then(function(doc){ if(tok===pv.tok) renderDoc(doc,tok); })
+      .catch(function(e){ if(tok===pv.tok) $('pvb').innerHTML='<div class="pv-load err">'+esc(msg(e))+'</div>'; });
+  }
+  function renderDoc(doc,tok){
+    var body=$('pvb'); body.innerHTML='';
+    var W=Math.max(120,body.clientWidth-24), dpr=Math.min(window.devicePixelRatio||1,2), chain=Promise.resolve();
+    var n=$('pvn'); if(n) n.textContent=' · '+doc.numPages+' стр.';
+    for(var i=1;i<=doc.numPages;i++)(function(p){
+      chain=chain.then(function(){
+        if(tok!==pv.tok) return;
+        return doc.getPage(p).then(function(pg){
+          if(tok!==pv.tok) return;
+          var sc=W/pg.getViewport({scale:1}).width, vp=pg.getViewport({scale:sc*dpr});
+          var c=document.createElement('canvas'); c.width=Math.floor(vp.width); c.height=Math.floor(vp.height);
+          c.style.width=W+'px'; c.style.height=Math.floor(vp.height/dpr)+'px'; body.appendChild(c);
+          return pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+        });
+      });
+    })(i);
+    chain.catch(function(){ if(tok===pv.tok) body.insertAdjacentHTML('beforeend','<div class="pv-load err">Часть страниц не отрисовалась.</div>'); });
+  }
+  function pvClose(){
+    clearTimeout(pv.openT); clearTimeout(pv.hideT);
+    pv.tok++; pv.mode=null; pv.file=null; $('pv').hidden=true; $('pvbg').hidden=true; $('pvb').innerHTML='';
+  }
+  $('pv').addEventListener('mouseenter',function(){ clearTimeout(pv.hideT); });
+  $('pv').addEventListener('mouseleave',function(){ if(pv.mode==='hover'){ pv.hideT=setTimeout(pvClose,240); } });
+  $('pv').addEventListener('click',function(){ if(pv.mode==='hover' && pv.file) showPv('pin',pv.file,pv.ctx); });
+  $('pvx').onclick=pvClose; $('pvbg').onclick=pvClose;
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && pv.mode) pvClose(); });
+  window.addEventListener('scroll',function(){ if(pv.mode==='hover') pvClose(); },{passive:true});
+
+  function download(file){
+    getBytes(file).then(function(b){
+      var url=URL.createObjectURL(new Blob([b],{type:'application/pdf'}));
+      var a=document.createElement('a'); a.href=url; a.download=file.name||'document.pdf';
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },4000);
+    }).catch(function(e){ toast(msg(e),true); });
+  }
+  function delFile(btn,ctx){
+    if(!btn.dataset.sure){ btn.dataset.sure='1'; btn.textContent='Точно удалить?'; btn.className='danger';
+      setTimeout(function(){ if(btn.isConnected){ delete btn.dataset.sure; btn.textContent='Удалить'; btn.className='ghost'; } },3500); return; }
+    btn.disabled=true; btn.textContent='Удаляю…'; busy++;
+    call('deleteFile',ctx.row,ctx.slot,ctx.deal).then(function(){
+      busy--; var r=rowById(ctx.row); if(r){ r['f'+ctx.slot]=null; decorM2(r); } pvClose(); toast('Документ '+ctx.slot+' откреплён');
+    }).catch(function(e){ busy--; btn.disabled=false; btn.textContent='Удалить'; toast(msg(e),true); });
+  }
+  function pickFor(row,slot){ var p=$('pick'); p.dataset.row=row; p.dataset.slot=slot; p.value=''; p.click(); }
+  $('pick').addEventListener('change',function(){
+    var f=this.files&&this.files[0]; if(!f) return; upload(Number(this.dataset.row),this.dataset.slot,f);
+  });
+  function upload(row,slot,f){
+    if(!/\.pdf$/i.test(f.name) && f.type!=='application/pdf'){ toast('Нужен файл в формате PDF',true); return; }
+    if(f.size>MAXF){ toast('Файл больше 10 МБ. Сожмите PDF и попробуйте снова.',true); return; }
+    var r=rowById(row); if(!r) return;
+    var el=$('c-'+row+'-m2'), td=el&&el.parentNode; if(td) td.classList.add('up'+slot);
+    var rd=new FileReader();
+    rd.onload=function(){
+      var s=String(rd.result), b64=s.slice(s.indexOf(',')+1); busy++;
+      toast('Загружаю '+f.name+'…');
+      call('uploadFile',row,slot,f.name,b64,r.deal).then(function(d){
+        busy--; bytesCache[d.id]=b64ToBytes(b64);
+        var rr=rowById(row); if(rr){ rr['f'+slot]=d; decorM2(rr); }
+        if(td) td.classList.remove('up'+slot);
+        if(pv.mode==='pin') pvClose();
+        toast('Документ '+slot+' прикреплён: '+d.name);
+      }).catch(function(e){ busy--; if(td) td.classList.remove('up'+slot); toast(msg(e),true); });
+    };
+    rd.onerror=function(){ if(td) td.classList.remove('up'+slot); toast('Не удалось прочитать файл',true); };
+    rd.readAsDataURL(f);
   }
 
   /* ── Checkpoint: 1-е нажатие — ввод суммы и отметка строк, 2-е — перенос в Archive ── */
@@ -550,10 +820,16 @@ td.changed .cell{animation:chg 1.6s ease-out}
       box.innerHTML=list.map(repHtml).join('');
     }).catch(function(e){ box.innerHTML='<div class="empty-a">'+esc(msg(e))+'</div>'; });
   }
+  function chip(it,slot){ var f=it['f'+slot]; return f?'<button type="button" class="ghost fchip" data-id="'+esc(f.id)+'" data-name="'+esc(f.name)+'" data-slot="'+slot+'" data-deal="'+esc(it.deal)+'" title="'+esc(f.name)+'">'+slot+'</button>':''; }
+  $('archive').addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.fchip'); if(!b) return;
+    showPv('pin',{id:b.dataset.id,name:b.dataset.name},{row:null,slot:b.dataset.slot,deal:b.dataset.deal});
+  });
   function repHtml(r){
     var d=new Date(r.at), s1=0,s2=0;
     var rows=r.items.map(function(it){ s1+=it.m1; s2+=it.m2;
       return '<tr'+(it.part?' class="part"':'')+'><td class="n" style="text-align:left">'+esc(it.deal)+'</td><td class="n">'+show(it.sum)+'</td><td class="n">'+show(it.m1)+'</td><td class="n">'+show(it.m2)+'</td><td class="n">'+show(r2(it.m1+it.m2))+'</td><td>'+esc(it.comment||'')+
+        chip(it,'B')+chip(it,'A')+
         (it.part?'<span class="rest">частично · остаток в таблице '+show(r2((it.rest1||0)+(it.rest2||0)))+' ₽</span>':'')+'</td></tr>'; }).join('');
     return '<article class="rep"><div class="rep-h"><span class="d">Checkpoint · '+esc(r.id)+'</span>'+
       '<span class="date">'+d.toLocaleDateString('ru-RU',{day:'2-digit',month:'long',year:'numeric'})+' · '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})+'</span>'+
@@ -582,7 +858,8 @@ td.changed .cell{animation:chg 1.6s ease-out}
   /* ── Синхронизация ── */
   function apply(d){
     // свои ещё не записанные правки не затираем данными с сервера
-    d.rows.forEach(function(nr){ FIELDS.forEach(function(f){ if(pend[nr.row+'-'+f]){ var o=rowById(nr.row); if(o) nr[f]=o[f]; } }); });
+    var DEP={sum:['sum','m1'],m2:['m2','m2in']};
+    d.rows.forEach(function(nr){ FIELDS.forEach(function(f){ if(pend[nr.row+'-'+f]){ var o=rowById(nr.row); if(o) (DEP[f]||[f]).forEach(function(x){ nr[x]=o[x]; }); } }); });
     state.user=d.user; state.rows=d.rows; render(); stamp(d.at);
   }
   function stamp(at){
