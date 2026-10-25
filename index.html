@@ -83,7 +83,8 @@ button.on{border-color:var(--ice);color:var(--void);background:var(--ice)}
 .cpinfo .warn{color:var(--warn)}
 .cpinfo button{margin-left:auto}
 tr.cp td{background:rgba(159,208,255,.07)}
-tr.cp td:first-child{box-shadow:inset 2px 0 0 var(--ice)}
+tr.cp td.dl{box-shadow:inset 2px 0 0 var(--ice)}
+tr.cpskip td{opacity:.38}
 tr.cp.part td{background:repeating-linear-gradient(135deg,rgba(159,208,255,.07) 0 8px,rgba(159,208,255,.02) 8px 16px)}
 .cpb{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:600 10px/1 var(--f-mono);letter-spacing:.06em;color:var(--void);background:var(--ice);padding:3px 5px;pointer-events:none}
 .cpb.part{background:transparent;color:var(--ice);border:1px dashed var(--ice)}
@@ -143,6 +144,22 @@ td.m2 .zh.act{cursor:pointer}
 td.m2 .zh.zB{clip-path:polygon(0 0,60.7% 0,39.3% 100%,0 100%)}
 td.m2 .zh.zA{clip-path:polygon(60.7% 0,100% 0,100% 100%,39.3% 100%)}
 
+/* Отгружено — лампа-индикатор */
+td.ship{text-align:center}
+th.ship-h{text-align:center!important}
+.lamp{display:inline-grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:0;background:transparent;vertical-align:middle;cursor:default}
+button.lamp{cursor:pointer}
+button.lamp:hover{background:transparent}
+.lamp i{display:block;width:12px;height:12px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffd0d0 0,var(--bad) 45%,#7a1f1f 100%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 8px rgba(255,107,107,.55),0 0 18px rgba(255,107,107,.18);transition:background .25s,box-shadow .25s,transform .15s}
+.lamp.lit i{background:radial-gradient(circle at 35% 30%,#e6fff0 0,var(--ok) 45%,#1f6b41 100%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 9px rgba(126,224,168,.65),0 0 20px rgba(126,224,168,.22);animation:lampOn 2.8s ease-in-out infinite}
+@keyframes lampOn{50%{box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 12px rgba(126,224,168,.85),0 0 26px rgba(126,224,168,.3)}}
+button.lamp:hover i{transform:scale(1.15)}
+button.lamp:active i{transform:scale(.9)}
+button.lamp:focus-visible{outline:1px solid var(--ice);outline-offset:-2px}
+
 /* Удаление сделки (owner) */
 .rdel{position:absolute;right:6px;top:50%;transform:translateY(-50%);z-index:3;height:24px;padding:0 8px;font-size:11px;letter-spacing:.04em;
   border-color:var(--line);color:var(--dim);background:var(--panel);opacity:0;transition:opacity .15s,background .15s,color .15s}
@@ -195,8 +212,8 @@ button.danger:hover{background:var(--bad);color:var(--void)}
 
 /* ── Таблица ───────────────────────── */
 .grid{margin-top:22px;overflow-x:auto;overflow-y:hidden;border:1px solid var(--line);background:linear-gradient(180deg,rgba(159,208,255,.03),transparent 120px),var(--panel)}
-table{border-collapse:collapse;width:100%;min-width:760px;font-variant-numeric:tabular-nums}
-col.c-deal{width:12%}col.c-sum{width:18%}col.c-m{width:17%}col.c-com{width:36%}
+table{border-collapse:collapse;width:100%;min-width:860px;font-variant-numeric:tabular-nums}
+col.c-ship{width:8%}col.c-deal{width:11%}col.c-sum{width:16%}col.c-m{width:16%}col.c-com{width:33%}
 th,td{border-bottom:1px solid var(--line);padding:0;text-align:left;vertical-align:middle}
 td+td,th+th{border-left:1px solid var(--line)}
 thead th.blank{border-left-color:transparent;border-bottom-color:transparent}
@@ -284,20 +301,21 @@ td.changed .cell{animation:chg 1.6s ease-out}
 
   <div class="grid" id="main">
     <table>
-      <colgroup><col class="c-deal"><col class="c-sum"><col class="c-m"><col class="c-m"><col class="c-com"></colgroup>
+      <colgroup><col class="c-ship"><col class="c-deal"><col class="c-sum"><col class="c-m"><col class="c-m"><col class="c-com"></colgroup>
       <thead>
         <tr>
-          <th class="blank" colspan="2"></th>
+          <th class="blank" colspan="3"></th>
           <th colspan="2" class="hud grand" id="h-all"><span class="lbl">Σ Маркетинг I + II</span><span class="val" id="v-all">0</span></th>
           <th class="blank"></th>
         </tr>
         <tr>
-          <th class="blank" colspan="2"></th>
+          <th class="blank" colspan="3"></th>
           <th class="hud" id="h-m1"><span class="lbl">Σ Маркетинг I</span><span class="val" id="v-m1">0</span><div class="bar"><i id="b-m1"></i></div></th>
           <th class="hud" id="h-m2"><span class="lbl">Σ Маркетинг II</span><span class="val" id="v-m2">0</span><div class="bar"><i id="b-m2"></i></div></th>
           <th class="blank"></th>
         </tr>
         <tr class="cols">
+          <th class="ship-h" title="Зелёный — отгружено, красный — нет. Меняет владелец.">Отгружено</th>
           <th>№ сделки<span class="lock" data-lock></span></th>
           <th style="text-align:right">Сумма сделки<span class="lock" data-lock></span></th>
           <th class="mk" style="text-align:right">Маркетинг I<span class="auto" title="Считается автоматически: Сумма сделки × 0,0409836">ƒ авто</span></th>
@@ -324,7 +342,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
 <div class="modal" id="modal" hidden>
   <form class="dlg" id="cpform" autocomplete="off">
     <h3>Checkpoint</h3>
-    <p>Строки отметятся сверху вниз по сумме Маркетинг I + II. Если последняя строка покрыта не полностью, она разделится: остаток останется в таблице.</p>
+    <p>Строки отметятся сверху вниз по сумме Маркетинг I + II, только отгруженные 🟢 — красные пропускаются. Если последняя строка покрыта не полностью, она разделится: остаток останется в таблице.</p>
     <label for="cpamt">Сумма чекпоинта, ₽</label>
     <input id="cpamt" inputmode="decimal" placeholder="0">
     <div class="avail" id="cpavail"></div>
@@ -353,7 +371,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
     var k1=function(x,cap){ return Math.min(cap, Math.round(x/1000)*1000); };
     for(var i=0;i<rows.length && left>0;i++){
       var r=rows[i], m1=Number(r.m1)||0, m2=Number(r.m2)||0, t=r2(m1+m2);
-      if(t<=0) continue;
+      if(t<=0 || !r.ship) continue;               // только отгруженные (зелёные)
       if(t<=left){ items.push({row:r.row,deal:r.deal,sum:r.sum,m1:m1,m2:m2,comment:r.comment,part:false,fB:r.fB||null,fA:r.fA||null}); left=r2(left-t); covered=r2(covered+t); continue; }
       var a1,a2;
       if(round){ a1=k1(m1*left/t,m1); a2=k1(m2*left/t,m2); }
@@ -385,15 +403,15 @@ td.changed .cell{animation:chg 1.6s ease-out}
     out+='trailer\n<< /Size '+objs.length+' /Root 1 0 R >>\nstartxref\n'+x+'\n%%EOF';
     return btoa(out);
   }
-  function demoRow(row,deal,sum,m2in,comment){ return {row:row,deal:deal,sum:sum,m1:r2(sum*K1),m2:m2in==null?null:r2(m2in*K2),m2in:m2in,m1cp:false,comment:comment,fB:null,fA:null}; }
+  function demoRow(row,deal,sum,m2in,comment,ship){ return {row:row,deal:deal,sum:sum,ship:!!ship,m1:r2(sum*K1),m2:m2in==null?null:r2(m2in*K2),m2in:m2in,m1cp:false,comment:comment,fB:null,fA:null}; }
   var Demo = {
     role:(/editor/.test(location.hash)?'editor':/user/.test(location.hash)?'user':'owner'),
     seq:6,
     rows:[
-      demoRow(2,'1041',1850000,45000,'Щит ВРУ-1, отгрузка 20.10'),
-      demoRow(3,'1042',642500,20000,'Ждём оплату счёта'),
-      demoRow(4,'1043',2310000,0,'КП согласовано'),
-      demoRow(5,'1044',418900,10000,'')
+      demoRow(2,'1041',1850000,45000,'Щит ВРУ-1, отгрузка 20.10',true),
+      demoRow(3,'1042',642500,20000,'Ждём оплату счёта',false),
+      demoRow(4,'1043',2310000,0,'КП согласовано',true),
+      demoRow(5,'1044',418900,10000,'',true)
     ],
     files:{ 'demo-b-1042':{name:'Акт_1042.pdf',b64:demoPdf('BOOK_KEEPER - DEMO B',['Deal 1042','Document B, page 1','Sample file for preview','Page 2 of the sample','Scroll works here'])} },
     archive:[],
@@ -402,6 +420,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
     find:function(row){ var r=this.rows.filter(function(x){return x.row===row;})[0]; if(!r) throw new Error('Строка не найдена. Обновите страницу.'); return r; },
     saveCell:function(k,row,field,value){
       if(field==='m1') throw new Error('Маркетинг I считается автоматически из суммы сделки.');
+      if(field==='ship'){ if(this.me().role!=='owner') throw new Error('Статус отгрузки меняет только владелец.'); this.find(row).ship=!!value; return {at:new Date().toISOString()}; }
       if(this.me().role==='user' && field!=='comment') throw new Error('Вам доступно редактирование только столбца «Комментарий».');
       var r=this.find(row), v=(field==='sum'||field==='m2')?(value===''?null:Number(value)):String(value);
       if(field==='m2'){ r.m2in=v; r.m2=v===null?null:r2(v*K2); }
@@ -411,7 +430,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
     addRow:function(){
       if(this.me().role==='user') throw new Error('Добавлять сделки может владелец или редактор.');
       var n=this.seq++;
-      this.rows.push({row:n,deal:String(1040+n-1),sum:null,m1:null,m2:null,m2in:null,m1cp:false,comment:'',fB:null,fA:null});
+      this.rows.push({row:n,deal:String(1040+n-1),ship:false,sum:null,m1:null,m2:null,m2in:null,m1cp:false,comment:'',fB:null,fA:null});
       return this.getData();
     },
     deleteDeal:function(k,row){
@@ -420,7 +439,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
     },
     checkpoint:function(k,amount,round){
       if(this.me().role!=='owner') throw new Error('Checkpoint доступен только владельцу.');
-      var p=planCP(this.rows,amount,!!round); if(!p.items.length) throw new Error('Нечего переносить: в строках нет сумм маркетинга.');
+      var p=planCP(this.rows,amount,!!round); if(!p.items.length) throw new Error('Нечего переносить: нет отгруженных строк с суммами маркетинга.');
       var self=this, rep={id:'CP-'+Date.now(),at:new Date().toISOString(),requested:amount,total:p.covered,round:!!round,items:p.items};
       p.items.forEach(function(it){
         var r=self.find(it.row);
@@ -495,14 +514,16 @@ td.changed .cell{animation:chg 1.6s ease-out}
     var tb=$('tb'), old={};
     [].forEach.call(tb.querySelectorAll('tr[data-row]'),function(tr){ old[tr.dataset.row]=true; });
     var frag=document.createDocumentFragment();
-    if(!state.rows.length){ var e=document.createElement('tr'); e.innerHTML='<td colspan="5" class="empty">Сделок пока нет'+(canAdd()?' — нажми «+ Сделка», чтобы добавить первую.':'.')+'</td>'; frag.appendChild(e); }
+    if(!state.rows.length){ var e=document.createElement('tr'); e.innerHTML='<td colspan="6" class="empty">Сделок пока нет'+(canAdd()?' — нажми «+ Сделка», чтобы добавить первую.':'.')+'</td>'; frag.appendChild(e); }
     state.rows.forEach(function(r,i){
       var tr=document.createElement('tr'); tr.dataset.row=r.row;
       if(firstPaint) { tr.className='in'; tr.style.animationDelay=Math.min(i*35,600)+'ms'; }
       else if(!old[r.row]) tr.className='in';
+      tr.appendChild(lampTd(r));
       FIELDS.forEach(function(f){
         var td=document.createElement('td'); var isNum=isNumF(f);
         if(f==='m1'||f==='m2') td.className='m'+(f==='m2'?' m2':'');
+        if(f==='deal') td.className='dl';
         var cls='cell'+(isNum?' num':'')+(f==='deal'?' deal':'');
         if(canEdit(f)){
           var inp=document.createElement('input');
@@ -534,11 +555,11 @@ td.changed .cell{animation:chg 1.6s ease-out}
     if(el.tagName==='INPUT') el.value=txt; else { el.textContent=txt; el.title=txt; }
     if(flash){ var td=el.parentNode; td.classList.remove('changed'); void td.offsetWidth; td.classList.add('changed'); }
   }
-  function refreshRow(r){ FIELDS.forEach(function(f){ setCell(r,f,false); }); decorM2(r); }
+  function refreshRow(r){ FIELDS.forEach(function(f){ setCell(r,f,false); }); decorM2(r); setLamp(r); }
   function patch(){
     state.rows.forEach(function(r){
       FIELDS.forEach(function(f){ if(!pend[r.row+'-'+f]) setCell(r,f,true); });
-      decorM2(r);
+      decorM2(r); if(!pend[r.row+'-ship']) setLamp(r);
     });
   }
   function plural(n,a,b,c){var m=n%10,h=n%100;return (m===1&&h!==11)?a:(m>=2&&m<=4&&(h<12||h>14))?b:c;}
@@ -633,6 +654,33 @@ td.changed .cell{animation:chg 1.6s ease-out}
     btn.addEventListener('dblclick',function(e){
       e.preventDefault(); if(tmr){ clearTimeout(tmr); tmr=null; }
       var el=$('c-'+rowId+'-m2'); if(el && el.tagName==='INPUT'){ pvClose(); el.focus(); }
+    });
+  }
+  /* ── Отгружено: лампа. Owner переключает кликом, остальные только видят. ── */
+  function lampTd(r){
+    var td=document.createElement('td'); td.className='ship';
+    var el=document.createElement(isOwner()?'button':'span'); el.id='c-'+r.row+'-ship'; el.className='lamp'; el.innerHTML='<i></i>';
+    if(isOwner()){ el.type='button'; el.addEventListener('click',function(){ toggleShip(r.row,td); }); }
+    td.appendChild(el); paintLamp(el,!!r.ship); return td;
+  }
+  function paintLamp(el,on){
+    el.classList.toggle('lit',on);
+    var t=on?'Отгружено':'Не отгружено'; if(isOwner()) t+=' · клик — изменить';
+    el.title=t; el.setAttribute('aria-label',on?'Отгружено':'Не отгружено');
+    if(el.tagName==='BUTTON') el.setAttribute('aria-pressed',on?'true':'false');
+  }
+  function setLamp(r){ var el=$('c-'+r.row+'-ship'); if(el && el.classList.contains('lit')!==!!r.ship){ paintLamp(el,!!r.ship); var td=el.parentNode; td.classList.remove('changed'); void td.offsetWidth; td.classList.add('changed'); } }
+  function toggleShip(rowId,td){
+    var r=rowById(rowId); if(!r) return;
+    var prev=!!r.ship, v=!prev; r.ship=v; paintLamp($('c-'+rowId+'-ship'),v); paintCP(); mark(td,'saved');
+    var k=rowId+'-ship', seq=(pend[k]||0)+1; pend[k]=seq; busy++;
+    var slow=setTimeout(function(){ if(pend[k]===seq) mark(td,'pending'); },1500);
+    call('saveCell',rowId,'ship',v,r.deal).then(function(d){
+      busy--; clearTimeout(slow); if(pend[k]===seq){ delete pend[k]; if(td.classList.contains('pending')) mark(td,'saved'); } stamp(d&&d.at);
+    }).catch(function(e){
+      busy--; clearTimeout(slow);
+      if(pend[k]===seq){ delete pend[k]; var rr=rowById(rowId); if(rr){ rr.ship=prev; var el=$('c-'+rowId+'-ship'); if(el) paintLamp(el,prev); } paintCP(); mark(td,'err'); }
+      toast(msg(e),true);
     });
   }
   function addDel(td,rowId){
@@ -786,7 +834,8 @@ td.changed .cell{animation:chg 1.6s ease-out}
     if(plan) plan.items.forEach(function(it){ by[it.row]=it; });
     [].forEach.call(tb.querySelectorAll('tr[data-row]'),function(tr){
       var it=by[tr.dataset.row]; tr.classList.toggle('cp',!!it); tr.classList.toggle('part',!!(it&&it.part));
-      var td=tr.firstChild, b=td.querySelector('.cpb');
+      var rr=rowById(Number(tr.dataset.row)); tr.classList.toggle('cpskip',!!plan && !!rr && !rr.ship);
+      var td=tr.querySelector('td.dl'), b=td.querySelector('.cpb');
       if(it){ if(!b){ b=document.createElement('span'); td.appendChild(b); }
         b.className='cpb'+(it.part?' part':''); b.textContent=it.part?'½ '+show(r2(it.m1+it.m2)):'✓'; }
       else if(b) b.remove();
@@ -805,8 +854,8 @@ td.changed .cell{animation:chg 1.6s ease-out}
     $('cpreset').onclick=function(){ cp=null; paintCP(); };
   }
   function openCP(){
-    var m1=0,m2=0; state.rows.forEach(function(r){ m1+=Number(r.m1)||0; m2+=Number(r.m2)||0; });
-    $('cpavail').textContent='Доступно в таблице: '+show(r2(m1+m2))+' ₽';
+    var m1=0,m2=0,n=0; state.rows.forEach(function(r){ if(!r.ship) return; n++; m1+=Number(r.m1)||0; m2+=Number(r.m2)||0; });
+    $('cpavail').textContent='Доступно в отгруженных ('+n+' '+plural(n,'строка','строки','строк')+'): '+show(r2(m1+m2))+' ₽';
     $('cpamt').value=''; try{ $('cpround').checked=localStorage.getItem('bk.round')==='1'; }catch(_){}
     $('modal').hidden=false; setTimeout(function(){ $('cpamt').focus(); },30);
   }
@@ -826,7 +875,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
     var rnd=$('cpround').checked;
     try{ localStorage.setItem('bk.round',rnd?'1':'0'); }catch(_){}
     var p=planCP(state.rows,v,rnd);
-    if(!p.items.length){ toast(rnd?'После округления брать нечего: увеличьте сумму или выключите округление':'Нечего отмечать: в строках нет сумм маркетинга',true); return; }
+    if(!p.items.length){ toast(rnd?'После округления брать нечего: увеличьте сумму или выключите округление':'Нечего отмечать: нет отгруженных 🟢 строк с суммами маркетинга',true); return; }
     cp={amount:v,round:rnd}; closeCP(); paintCP();
   };
   $('cpcancel').onclick=closeCP;
@@ -888,7 +937,7 @@ td.changed .cell{animation:chg 1.6s ease-out}
   function apply(d){
     // свои ещё не записанные правки не затираем данными с сервера
     var DEP={sum:['sum','m1'],m2:['m2','m2in']};
-    d.rows.forEach(function(nr){ FIELDS.forEach(function(f){ if(pend[nr.row+'-'+f]){ var o=rowById(nr.row); if(o) (DEP[f]||[f]).forEach(function(x){ nr[x]=o[x]; }); } }); });
+    d.rows.forEach(function(nr){ FIELDS.concat('ship').forEach(function(f){ if(pend[nr.row+'-'+f]){ var o=rowById(nr.row); if(o) (DEP[f]||[f]).forEach(function(x){ nr[x]=o[x]; }); } }); });
     state.user=d.user; state.rows=d.rows; render(); stamp(d.at);
   }
   function stamp(at){
